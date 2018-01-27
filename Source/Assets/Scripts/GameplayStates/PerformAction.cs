@@ -1,18 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class PerformAction : GameState
 {
-    private GameObject player;
+    private GameObject playerHandler;
     public GameObject notificationTransmission;
     public override void Init(GameStateController gSC)
     {
         base.Init(gSC);
 
-        player = GameObject.FindGameObjectWithTag("Player");
-
+        GameObject[] playersList = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject player in playersList)
+        {
+            if (player.GetComponent<NetworkIdentity>().isLocalPlayer)
+            {
+                playerHandler = player.gameObject;
+            }
+        }
+        
         GameObject exList = gSC.executionList;
 
         StartCoroutine(ExecuteActions());
@@ -48,18 +56,18 @@ public class PerformAction : GameState
             switch (action)
             {
                 case "MoveRightCard":
-                    player.GetComponent<PlayerController>().MoveRight();
+                    playerHandler.GetComponent<PlayerController>().MoveRight();
                     break;
                 case "MoveLeftCard":
-                    player.GetComponent<PlayerController>().MoveLeft();
+                    playerHandler.GetComponent<PlayerController>().MoveLeft();
                     break;
                 case "JumpCard":
-                    player.GetComponent<PlayerController>().Jump();
+                    playerHandler.GetComponent<PlayerController>().Jump();
                     yield return new WaitForSeconds(GameManager.executionTime);
-                    player.GetComponent<PlayerController>().Fall();
+                    playerHandler.GetComponent<PlayerController>().Fall();
                     break;
                 case "EvadeCard":
-                    player.GetComponent<PlayerController>().Evade();
+                    playerHandler.GetComponent<PlayerController>().Evade();
                     break;
             }
             //Delay Actinos 
