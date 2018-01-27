@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
     public GameObject ExecutionList;
     public static string GameState = "Offline";
     public static int executionTime = 2;
+    public static List<string> ActionList = new List<string>();
+    public static int cardLimit = 4;
 	// Use this for initialization
 	void Start () {
         ExecutionList = GameObject.Find("ExecutionList");

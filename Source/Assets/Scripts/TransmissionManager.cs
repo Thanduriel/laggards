@@ -7,7 +7,6 @@ public class TransmissionManager : MonoBehaviour
 {
 
     GameObject ExecutionList;
-    GameObject Player;
     bool _enableTransmission = false;
 
     // Use this for initialization
@@ -43,56 +42,6 @@ public class TransmissionManager : MonoBehaviour
 
     void TrasmitActions()
     {
-        Debug.Log("Transmitting Actions");
-
-        //Create Transmission Array
-        List<string> ActionList = new List<string>();
-
-        //Add Transmissions To List
-        foreach (Transform child in ExecutionList.transform)
-        {
-            if (child.gameObject.GetComponent<Text>().text != "Action Chain:")
-                ActionList.Add(child.gameObject.GetComponent<Text>().text);
-        }
-
         GameManager.GameState = "Transmission";
-
-        StartCoroutine(executeActions(ActionList));
-
-        
-    }
-
-    IEnumerator executeActions(List<string> ActionList)
-    {
-        //Execute Actions
-        foreach (string action in ActionList)
-        {
-            switch (action)
-            {
-                case "MoveRightCard":
-                    GetPlayer().GetComponent<PlayerController>().MoveRight();
-                    break;
-                case "MoveLeftCard":
-                    GetPlayer().GetComponent<PlayerController>().MoveLeft();
-                    break;
-                case "JumpCard":
-                    GetPlayer().GetComponent<PlayerController>().Jump();
-                    yield return new WaitForSeconds(GameManager.executionTime);
-                    GetPlayer().GetComponent<PlayerController>().Fall();
-                    break;
-                case "EvadeCard":
-                    GetPlayer().GetComponent<PlayerController>().Evade();
-                    break;
-            }
-            //Delay Actinos 
-            yield return new WaitForSeconds(GameManager.executionTime);
-        }
-
-        GameManager.GameState = "Planning";
-    }
-
-    GameObject GetPlayer()
-    {
-        return GameObject.FindGameObjectWithTag("Player");
     }
 }
