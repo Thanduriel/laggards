@@ -17,17 +17,11 @@ public class ActionSelection : GameState
         ClearDeck();
         GenerateDeck();
 
-        //Add Button Event
-        //Button b = gameObject.GetComponent<Button>();
-        //b.onClick.AddListener(delegate () { if (enableTransmission) { TransmitActions(); } });
-
-        //yield break;
     }
 
     public override IEnumerator GameStateUpdate()
     {
-        GameObject exList = gSC.executionList;
-        if (exList.transform.childCount > 1)
+        if (gSC.executionList.transform.childCount > 1)
         {
             enableTransmission = true;
         }
@@ -56,7 +50,7 @@ public class ActionSelection : GameState
     {
         foreach (GameObject card in CardList)
         {
-            Instantiate(card, gSC.executionList.transform);
+            Instantiate(card, gSC.cardWidget.transform);
         }
     }
 

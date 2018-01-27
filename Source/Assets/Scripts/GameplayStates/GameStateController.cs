@@ -6,7 +6,6 @@ using UnityEngine;
 public class GameStateController : MonoBehaviour
 {
     public GameState startGamestate;
-
     public SetupGame setupGame;
     public ActionSelection actionSelection;
     public PerformAction performAction;
@@ -15,6 +14,7 @@ public class GameStateController : MonoBehaviour
 
     [HideInInspector] public GameState currentGamestate;
     public GameObject executionList;
+    public GameObject cardWidget;
 
     private bool isSwitching = false;
 

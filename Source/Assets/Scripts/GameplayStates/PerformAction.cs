@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PerformAction : GameState
 {
     private GameObject player;
-
+    public GameObject notificationTransmission;
     public override void Init(GameStateController gSC)
     {
         base.Init(gSC);
@@ -14,15 +14,14 @@ public class PerformAction : GameState
         player = GameObject.FindGameObjectWithTag("Player");
 
         GameObject exList = gSC.executionList;
-        if (gSC.executionList.transform.childCount > 1)
-        {
-            DestroyChildren(exList.transform, null, "ChainText(Clone)");
-        }
 
         StartCoroutine(ExecuteActions());
 
         DestroyChildren(exList.transform);
-        //yield break;
+
+        notificationTransmission.SetActive(true);
+
+
     }
 
     public override IEnumerator GameStateUpdate()
@@ -43,13 +42,7 @@ public class PerformAction : GameState
                 ActionList.Add(child.gameObject.GetComponent<Text>().text);
             }
         }
-        //foreach (Text child in gSC.executionList.transform.GetComponentsInChildren<Text>())
-        //{
-        //    ActionList.Add(child.text);
-        //    //ActionList.Add(child.gameObject.GetComponent<Text>().text);
-        //}
 
-        //Execute Actions
         foreach (string action in ActionList)
         {
             switch (action)
@@ -71,8 +64,9 @@ public class PerformAction : GameState
             }
             //Delay Actinos 
             yield return new WaitForSeconds(GameManager.executionTime);
+           
         }
-
+        notificationTransmission.SetActive(false);
         yield return gSC.SwitchGameState(gSC.actionSelection);
     }
 }

@@ -11,13 +11,6 @@ public class NotificationManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(GameManager.GameState == "Transmission")
-        {
-            transform.Find("TransmissionMessage").gameObject.SetActive(true);
-        }
-        else
-        {
-            transform.Find("TransmissionMessage").gameObject.SetActive(false);
-        }
+
     }
 }
