@@ -16,6 +16,8 @@ public class PlayerController : NetworkBehaviour
 	public Vector2 evadeHitBoxSize;
 	public Vector2 evadeHitBoxOffset;
 
+    public GameObject Bullet;
+
     public static int cardLimit = 6;
 	// Use this for initialization
 	void Start () {
@@ -98,10 +100,21 @@ public class PlayerController : NetworkBehaviour
 		PlayerController oth;
 		if (hits > 1 && (oth = hitInfos[1].collider.gameObject.GetComponent<PlayerController>()))
 			Destroy(hitInfos[1].collider.gameObject);
-		// todo deal damage here
-	}
+        // todo deal damage here
 
-	public enum MovementDir
+        //Shooting Bullet
+        
+       GameObject tempBulletHandler =  (GameObject) Instantiate(Bullet, transform);
+        if (gameObject.GetComponent<SpriteRenderer>().flipX)
+            tempBulletHandler.GetComponent<Bullet>().direction = "left";
+        else
+            tempBulletHandler.GetComponent<Bullet>().direction = "right";
+
+        Destroy(tempBulletHandler, 1.0f);
+
+    }
+
+    public enum MovementDir
 	{
 		Right,
 		Left,
