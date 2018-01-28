@@ -16,8 +16,7 @@ public class PlayerController : NetworkBehaviour
 	public Vector2 evadeHitBoxSize;
 	public Vector2 evadeHitBoxOffset;
 
-	// Use this for initialization
-    public static int cardLimit = 4;
+    public static int cardLimit = 6;
 	// Use this for initialization
 	void Start () {
 		SetMovementDir(transform.position.x > 0f ? MovementDir.Left : MovementDir.Right);
