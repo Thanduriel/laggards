@@ -124,9 +124,10 @@ MonoBehaviour:
   spIdleSprite: {fileID: 21300000, guid: 2a5c2f3ca4ae14e7e91149316db1e054, type: 3}
   spMoveLeft: {fileID: 21300000, guid: 2a5c2f3ca4ae14e7e91149316db1e054, type: 3}
   spMoveRight: {fileID: 21300000, guid: 2a5c2f3ca4ae14e7e91149316db1e054, type: 3}
-  spStrikeForward: {fileID: 21300000, guid: b6c2d3a1d0b194296ac57df14d20e8ad, type: 3}
+  spStrikeForward: {fileID: 21300000, guid: 426b706446ade402eaf3f3d592a2a97d, type: 3}
   evadeHitBoxSize: {x: 0.2, y: 0.18}
   evadeHitBoxOffset: {x: 0.03, y: -0.15}
+  Bullet: {fileID: 1290852438057496, guid: 601e9a32d2046054985adbbe44003069, type: 2}
 --- !u!114 &114463466350988786
 MonoBehaviour:
   m_ObjectHideFlags: 1
