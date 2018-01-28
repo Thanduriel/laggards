@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114101407155812540}
   - component: {fileID: 50294820599378158}
   - component: {fileID: 61423170947033658}
+  - component: {fileID: 82462566794423838}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -90,6 +91,86 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.38}
   m_EdgeRadius: 0
+--- !u!82 &82462566794423838
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1159958676459428}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114101407155812540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,6 +191,9 @@ MonoBehaviour:
   evadeHitBoxSize: {x: 0.2, y: 0.18}
   evadeHitBoxOffset: {x: 0.03, y: -0.15}
   Bullet: {fileID: 1290852438057496, guid: 601e9a32d2046054985adbbe44003069, type: 2}
+  RunningAudio: {fileID: 8300000, guid: a94a92190730c1341bcb8ba162fbb7f5, type: 3}
+  ShootAudio: {fileID: 8300000, guid: dc7a94de18ae39a48a4bd726bea54012, type: 3}
+  JumpAudio: {fileID: 8300000, guid: 5abd4f4880cef184cb277f7fa6ec0c82, type: 3}
 --- !u!114 &114463466350988786
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -19,6 +19,10 @@ public class PlayerController : NetworkBehaviour
     public GameObject Bullet;
 
     public static int cardLimit = 6;
+
+    public AudioClip RunningAudio;
+    public AudioClip ShootAudio;
+    public AudioClip JumpAudio;
 	// Use this for initialization
 	void Start () {
 		SetMovementDir(transform.position.x > 0f ? MovementDir.Left : MovementDir.Right);
@@ -48,12 +52,15 @@ public class PlayerController : NetworkBehaviour
 		SetMovementDir(dir);
 		m_bufferedMovement = amount;
 		m_movementSpeed = amount;
-	}
+
+    }
 
 	public void MoveLeft(float amount)
     {
 		Move(amount, MovementDir.Left);
 		gameObject.GetComponent<SpriteRenderer>().sprite = spMoveLeft;
+        gameObject.GetComponent<AudioSource>().PlayOneShot(RunningAudio, 50);
+
     }
 
 
@@ -61,6 +68,7 @@ public class PlayerController : NetworkBehaviour
     {
 		Move(amount, MovementDir.Right);
 		gameObject.GetComponent<SpriteRenderer>().sprite = spMoveRight;
+        gameObject.GetComponent<AudioSource>().PlayOneShot(RunningAudio, 50);
     }
 
     public void Jump(float strength)
@@ -68,6 +76,8 @@ public class PlayerController : NetworkBehaviour
         Rigidbody2D body = GetComponent<Rigidbody2D>();
 		body.AddForce(new Vector2(0, strength), ForceMode2D.Impulse);
         gameObject.GetComponent<SpriteRenderer>().sprite = spJumpSprite;
+        gameObject.GetComponent<AudioSource>().PlayOneShot(JumpAudio, 50);
+
     }
 
     public void Evade()
@@ -111,6 +121,9 @@ public class PlayerController : NetworkBehaviour
             tempBulletHandler.GetComponent<Bullet>().direction = "right";
 
         Destroy(tempBulletHandler, 1.0f);
+
+        gameObject.GetComponent<AudioSource>().PlayOneShot(ShootAudio, 50);
+
 
     }
 
