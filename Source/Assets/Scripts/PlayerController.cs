@@ -69,7 +69,7 @@ public class PlayerController : NetworkBehaviour
     public void Jump(float strength)
     {
         Rigidbody2D body = GetComponent<Rigidbody2D>();
-		animator.SetInteger ("ActionState", 2);
+
 		body.AddForce(new Vector2(0, strength), ForceMode2D.Impulse);
         gameObject.GetComponent<SpriteRenderer>().sprite = spJumpSprite;
     }
