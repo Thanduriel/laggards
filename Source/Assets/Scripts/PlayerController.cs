@@ -16,13 +16,15 @@ public class PlayerController : NetworkBehaviour
 	public Vector2 evadeHitBoxSize;
 	public Vector2 evadeHitBoxOffset;
 
-    public GameObject Bullet;
+	private Animator animator;
+  public GameObject Bullet;
+
 
     public static int cardLimit = 6;
 	// Use this for initialization
 	void Start () {
 		SetMovementDir(transform.position.x > 0f ? MovementDir.Left : MovementDir.Right);
-
+		animator = this.GetComponent<Animator>();
 		// fetch default size
 		BoxCollider2D collider = gameObject.GetComponent<BoxCollider2D>();
 		hitBoxSize = collider.size;
@@ -41,7 +43,12 @@ public class PlayerController : NetworkBehaviour
 		float nextMovement = Mathf.Max(0f, m_bufferedMovement - Time.deltaTime * m_movementSpeed);
 		float move = m_bufferedMovement - nextMovement;
 		m_bufferedMovement = nextMovement;
-        if(move != 0f) transform.Translate(m_movementDir * move, 0, 0);
+		if (move != 0f)
+			animator.SetInteger ("ActionState", 1);
+			transform.Translate (m_movementDir * move, 0, 0);
+		if (move == 0f)
+			animator.SetInteger ("ActionState", 0);
+			transform.Translate(m_movementDir * move, 0, 0);
     }
 
 	public void Move(float amount, MovementDir dir) {
@@ -66,6 +73,7 @@ public class PlayerController : NetworkBehaviour
     public void Jump(float strength)
     {
         Rigidbody2D body = GetComponent<Rigidbody2D>();
+		animator.SetInteger ("ActionState", 2);
 		body.AddForce(new Vector2(0, strength), ForceMode2D.Impulse);
         gameObject.GetComponent<SpriteRenderer>().sprite = spJumpSprite;
     }
