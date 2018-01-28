@@ -16,8 +16,7 @@ public class PlayerController : NetworkBehaviour
 	public Vector2 evadeHitBoxSize;
 	public Vector2 evadeHitBoxOffset;
 
-	// Use this for initialization
-    public static int cardLimit = 4;
+    public static int cardLimit = 6;
 	// Use this for initialization
 	void Start () {
 		SetMovementDir(transform.position.x > 0f ? MovementDir.Left : MovementDir.Right);
@@ -37,37 +36,37 @@ public class PlayerController : NetworkBehaviour
 	// Update is called once per frame
 	void Update () {
 		// smooth movement
-		float nextMovement = Mathf.Max(0f, m_bufferedMovement - Time.deltaTime);
+		float nextMovement = Mathf.Max(0f, m_bufferedMovement - Time.deltaTime * m_movementSpeed);
 		float move = m_bufferedMovement - nextMovement;
 		m_bufferedMovement = nextMovement;
         if(move != 0f) transform.Translate(m_movementDir * move, 0, 0);
     }
 
-    public void MoveLeft()
+	public void Move(float amount, MovementDir dir) {
+		SetMovementDir(dir);
+		m_bufferedMovement = amount;
+		m_movementSpeed = amount;
+	}
+
+	public void MoveLeft(float amount)
     {
-		SetMovementDir(MovementDir.Left);
-		m_bufferedMovement = 1f;
+		Move(amount, MovementDir.Left);
 		gameObject.GetComponent<SpriteRenderer>().sprite = spMoveLeft;
     }
 
 
-    public void MoveRight()
+    public void MoveRight(float amount)
     {
-		SetMovementDir(MovementDir.Right);
-		m_bufferedMovement = 1f;
-        gameObject.GetComponent<SpriteRenderer>().sprite = spMoveRight;
+		Move(amount, MovementDir.Right);
+		gameObject.GetComponent<SpriteRenderer>().sprite = spMoveRight;
     }
 
-    public void Jump()
+    public void Jump(float strength)
     {
         Rigidbody2D body = GetComponent<Rigidbody2D>();
-		body.AddForce(new Vector2(0, 8f), ForceMode2D.Impulse);
+		body.AddForce(new Vector2(0, strength), ForceMode2D.Impulse);
         gameObject.GetComponent<SpriteRenderer>().sprite = spJumpSprite;
     }
-	public void MoveJump()
-	{
-		m_bufferedMovement = 1f;
-	}
 
     public void Evade()
     {
@@ -102,10 +101,11 @@ public class PlayerController : NetworkBehaviour
 		// todo deal damage here
 	}
 
-	enum MovementDir
+	public enum MovementDir
 	{
 		Right,
-		Left
+		Left,
+		Current
 	}
 	private void SetMovementDir(MovementDir dir)
 	{
@@ -115,7 +115,7 @@ public class PlayerController : NetworkBehaviour
 			spriteRenderer.flipX = true;
 			m_movementDir = -1f;
 		}
-		else{
+		else if(dir == MovementDir.Right){
 			spriteRenderer.flipX = false;
 			m_movementDir = 1f;
 		}
@@ -123,6 +123,7 @@ public class PlayerController : NetworkBehaviour
 	
 	private float m_bufferedMovement;
 	private float m_movementDir;
+	private float m_movementSpeed;
 
 	private Vector2 hitBoxSize;
 	private Vector2 hitBoxOffset;

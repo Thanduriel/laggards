@@ -7,14 +7,19 @@ public class ActionSelection : GameState
 {
     //Attributes
     public GameObject[] CardList;
-    public GameObject doActionButton;
+	public int[] CardProbabilities;
+	public GameObject doActionButton;
     bool enableTransmission = false;
 
     public override void Init(GameStateController gSC)
     {
         base.Init(gSC);
 
-        ClearDeck();
+		for (int i = 0; i < CardProbabilities.Length; ++i)
+			for (int j = 0; j < CardProbabilities[i]; ++j)
+				WeightedCards.Add(CardList[i]);
+
+		ClearDeck();
         GenerateDeck();
 
     }
@@ -51,7 +56,7 @@ public class ActionSelection : GameState
         int Capacity = PlayerController.cardLimit - gSC.cardWidget.transform.childCount;
         for (int i=1;i<= Capacity; i++)
         {
-            Instantiate(CardList[Random.Range(1, CardList.Length)], gSC.cardWidget.transform);
+            Instantiate(WeightedCards[Random.Range(0, WeightedCards.Count)], gSC.cardWidget.transform);
         }
     }
 
@@ -64,4 +69,6 @@ public class ActionSelection : GameState
             StartCoroutine(gSC.SwitchGameState(gSC.performAction));
         }
     }
+
+	private List<GameObject> WeightedCards = new List<GameObject>();
 }
