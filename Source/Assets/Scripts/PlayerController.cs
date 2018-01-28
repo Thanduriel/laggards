@@ -41,20 +41,8 @@ public class PlayerController : NetworkBehaviour
         m_movementDir = -1f;
 		m_bufferedMovement = 1f;
 		gameObject.GetComponent<SpriteRenderer>().sprite = spMoveLeft;
-        StartCoroutine(AnimateLeft());
     }
 
-    private IEnumerator AnimateLeft()
-    {
-        gameObject.GetComponent<SpriteRenderer>().sprite = spMoveLeft;
-        yield return new WaitForSeconds(0.5f);
-        gameObject.GetComponent<SpriteRenderer>().sprite = spMoveLeft;
-        yield return new WaitForSeconds(0.5f);
-        gameObject.GetComponent<SpriteRenderer>().sprite = spMoveLeft;
-        yield return new WaitForSeconds(0.5f);
-        gameObject.GetComponent<SpriteRenderer>().sprite = spMoveLeft;
-        yield return new WaitForSeconds(0.5f);
-    }
 
     public void MoveRight()
     {
