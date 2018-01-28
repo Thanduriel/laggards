@@ -51,29 +51,40 @@ public class PerformAction : GameState
             }
         }
 
-        foreach (string action in ActionList)
-        {
-            switch (action)
-            {
-                case "MoveRightCard":
-                    playerHandler.GetComponent<PlayerController>().MoveRight();
-                    break;
-                case "MoveLeftCard":
-                    playerHandler.GetComponent<PlayerController>().MoveLeft();
-                    break;
-                case "JumpCard":
-                    playerHandler.GetComponent<PlayerController>().Jump();
-                    yield return new WaitForSeconds(GameManager.executionTime);
-                    playerHandler.GetComponent<PlayerController>().Fall();
-                    break;
-                case "EvadeCard":
-                    playerHandler.GetComponent<PlayerController>().Evade();
-                    break;
-            }
-            //Delay Actinos 
-            yield return new WaitForSeconds(GameManager.executionTime);
-           
-        }
+		PlayerController playerController = playerHandler.GetComponent<PlayerController>();
+		if (playerController.isLocalPlayer)
+			foreach (string action in ActionList)
+			{
+
+				switch (action)
+				{
+					case "MoveRightCard":
+						playerController.MoveRight();
+						break;
+					case "MoveLeftCard":
+						playerController.MoveLeft();
+						break;
+					case "JumpCard":
+						playerController.Jump();
+						yield return new WaitForSeconds(GameManager.executionTime * 0.2f);
+						playerController.MoveJump();
+						yield return new WaitForSeconds(GameManager.executionTime*0.4f);
+						playerController.Idle();
+						break;
+					case "EvadeCard":
+						playerController.Evade();
+						break;
+					case "StrikeForwardCard":
+						yield return new WaitForSeconds(GameManager.executionTime * 0.25f);
+						playerController.StrikeForward();
+						break;
+				}
+				//Delay actions 
+				yield return new WaitForSeconds(GameManager.executionTime);
+
+				// return to idle state
+				playerHandler.GetComponent<PlayerController>().Idle();
+			}
         notificationTransmission.SetActive(false);
         yield return gSC.SwitchGameState(gSC.actionSelection);
     }
