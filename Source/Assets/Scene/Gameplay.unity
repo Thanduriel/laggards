@@ -335,6 +335,12 @@ MonoBehaviour:
   - {fileID: 1395509261955902, guid: 3e59b41a4cababa4eabb8954a6901c19, type: 2}
   - {fileID: 1902742234758084, guid: addf2ac5410182747a882124790a85cb, type: 2}
   - {fileID: 1807901673452854, guid: 2e5b1afb9fbbff546a2f2062656005e4, type: 2}
+  - {fileID: 1775616875730780, guid: 8ea9919407387ac4fa2b9f3741ec4ee0, type: 2}
+  - {fileID: 1690375667810886, guid: 0e24605c34f092e4ab3fd409124da919, type: 2}
+  - {fileID: 1770445982486626, guid: d50fa8543abc27649bdb5e65995b24ee, type: 2}
+  - {fileID: 1518876944412208, guid: 4d636a68dd88c1f4d8d945ba05b93d4e, type: 2}
+  - {fileID: 1845155796880998, guid: 39479c13e3a939a45ac97e5b9d22a2d1, type: 2}
+  - {fileID: 1090569869096954, guid: 58ac3b339c643024bb6f25d270736f67, type: 2}
   doActionButton: {fileID: 2141819743}
 --- !u!114 &177957260
 MonoBehaviour:
@@ -948,7 +954,7 @@ Tilemap:
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -3, y: -24, z: 0}
-  m_Size: {x: 15, y: 24, z: 1}
+  m_Size: {x: 23, y: 28, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:

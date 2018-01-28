@@ -59,16 +59,35 @@ public class PerformAction : GameState
 				switch (action)
 				{
 					case "MoveRightCard":
-						playerController.MoveRight();
+						playerController.MoveRight(1f);
 						break;
 					case "MoveLeftCard":
-						playerController.MoveLeft();
+						playerController.MoveLeft(1f);
+						break;
+					case "MoveRight2":
+						playerController.MoveRight(2f);
+						break;
+					case "MoveLeft2":
+						playerController.MoveLeft(2f);
+						break;
+					case "MoveRight3":
+						playerController.MoveRight(3f);
+						break;
+					case "MoveLeft3":
+						playerController.MoveLeft(3f);
 						break;
 					case "JumpCard":
-						playerController.Jump();
+						playerController.Jump(8f);
 						yield return new WaitForSeconds(GameManager.executionTime * 0.2f);
-						playerController.MoveJump();
+						playerController.Move(1f, PlayerController.MovementDir.Current);
 						yield return new WaitForSeconds(GameManager.executionTime*0.4f);
+						playerController.Idle();
+						break;
+					case "StrongJumpCard":
+						playerController.Jump(10f);
+						yield return new WaitForSeconds(GameManager.executionTime * 0.2f);
+						playerController.Move(2f, PlayerController.MovementDir.Current);
+						yield return new WaitForSeconds(GameManager.executionTime * 0.4f);
 						playerController.Idle();
 						break;
 					case "EvadeCard":
