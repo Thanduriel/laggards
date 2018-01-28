@@ -78,4 +78,9 @@ public class SceneController : MonoBehaviour {
         isFading = false;
         faderCanvasgroup.blocksRaycasts = false;
     }
+
+    public void ExiGame()
+    {
+        Application.Quit();
+    }
 }

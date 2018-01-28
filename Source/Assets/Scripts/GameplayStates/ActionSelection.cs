@@ -48,9 +48,10 @@ public class ActionSelection : GameState
 
     private void GenerateDeck()
     {
-        foreach (GameObject card in CardList)
+        int Capacity = PlayerController.cardLimit - gSC.cardWidget.transform.childCount;
+        for (int i=1;i<= Capacity; i++)
         {
-            Instantiate(card, gSC.cardWidget.transform);
+            Instantiate(CardList[Random.Range(1, CardList.Length)], gSC.cardWidget.transform);
         }
     }
 

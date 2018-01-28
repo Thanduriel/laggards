@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -10,6 +11,7 @@ public class PlayerController : NetworkBehaviour
     public Sprite spIdleSprite;
     public Sprite spMoveLeft;
     public Sprite spMoveRight;
+    public static int cardLimit = 4;
 	// Use this for initialization
 	void Start () {
         if (transform.position.x > 0)
@@ -26,10 +28,6 @@ public class PlayerController : NetworkBehaviour
 	// Update is called once per frame
 	void Update () {
         if (!isLocalPlayer){return;}
-
-        var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
-        var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
-
 		// smooth movement
 		float nextMovement = Mathf.Max(0f, m_bufferedMovement - Time.deltaTime);
 		float move = m_bufferedMovement - nextMovement;
@@ -43,6 +41,19 @@ public class PlayerController : NetworkBehaviour
         m_movementDir = -1f;
 		m_bufferedMovement = 1f;
 		gameObject.GetComponent<SpriteRenderer>().sprite = spMoveLeft;
+        StartCoroutine(AnimateLeft());
+    }
+
+    private IEnumerator AnimateLeft()
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = spMoveLeft;
+        yield return new WaitForSeconds(0.5f);
+        gameObject.GetComponent<SpriteRenderer>().sprite = spMoveLeft;
+        yield return new WaitForSeconds(0.5f);
+        gameObject.GetComponent<SpriteRenderer>().sprite = spMoveLeft;
+        yield return new WaitForSeconds(0.5f);
+        gameObject.GetComponent<SpriteRenderer>().sprite = spMoveLeft;
+        yield return new WaitForSeconds(0.5f);
     }
 
     public void MoveRight()
