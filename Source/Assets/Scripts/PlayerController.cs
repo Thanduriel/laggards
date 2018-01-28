@@ -15,8 +15,16 @@ public class PlayerController : NetworkBehaviour
 
 	public Vector2 evadeHitBoxSize;
 	public Vector2 evadeHitBoxOffset;
+
 	private Animator animator;
+  public GameObject Bullet;
+
+
     public static int cardLimit = 6;
+
+    public AudioClip RunningAudio;
+    public AudioClip ShootAudio;
+    public AudioClip JumpAudio;
 	// Use this for initialization
 	void Start () {
 		SetMovementDir(transform.position.x > 0f ? MovementDir.Left : MovementDir.Right);
@@ -51,12 +59,15 @@ public class PlayerController : NetworkBehaviour
 		SetMovementDir(dir);
 		m_bufferedMovement = amount;
 		m_movementSpeed = amount;
-	}
+
+    }
 
 	public void MoveLeft(float amount)
     {
 		Move(amount, MovementDir.Left);
 		gameObject.GetComponent<SpriteRenderer>().sprite = spMoveLeft;
+        gameObject.GetComponent<AudioSource>().PlayOneShot(RunningAudio, 50);
+
     }
 
 
@@ -64,6 +75,7 @@ public class PlayerController : NetworkBehaviour
     {
 		Move(amount, MovementDir.Right);
 		gameObject.GetComponent<SpriteRenderer>().sprite = spMoveRight;
+        gameObject.GetComponent<AudioSource>().PlayOneShot(RunningAudio, 50);
     }
 
     public void Jump(float strength)
@@ -72,6 +84,8 @@ public class PlayerController : NetworkBehaviour
 
 		body.AddForce(new Vector2(0, strength), ForceMode2D.Impulse);
         gameObject.GetComponent<SpriteRenderer>().sprite = spJumpSprite;
+        gameObject.GetComponent<AudioSource>().PlayOneShot(JumpAudio, 50);
+
     }
 
     public void Evade()
@@ -104,10 +118,24 @@ public class PlayerController : NetworkBehaviour
 		PlayerController oth;
 		if (hits > 1 && (oth = hitInfos[1].collider.gameObject.GetComponent<PlayerController>()))
 			Destroy(hitInfos[1].collider.gameObject);
-		// todo deal damage here
-	}
+        // todo deal damage here
 
-	public enum MovementDir
+        //Shooting Bullet
+        
+       GameObject tempBulletHandler =  (GameObject) Instantiate(Bullet, transform);
+        if (gameObject.GetComponent<SpriteRenderer>().flipX)
+            tempBulletHandler.GetComponent<Bullet>().direction = "left";
+        else
+            tempBulletHandler.GetComponent<Bullet>().direction = "right";
+
+        Destroy(tempBulletHandler, 1.0f);
+
+        gameObject.GetComponent<AudioSource>().PlayOneShot(ShootAudio, 50);
+
+
+    }
+
+    public enum MovementDir
 	{
 		Right,
 		Left,
