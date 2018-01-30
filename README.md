@@ -17,3 +17,12 @@ In a fierce battle for resourced of a foreign planet, two factions battle each o
 # Development
 We will coninute to improve and update the game,
 Feel free to share any ideas or improvments that might help this project.
+
+# Credits
+
+ - Robert Jendersie
+ - Antolyt
+ - Hudhaifa Ahmed
+ - Shiyu Rao
+ - Stefan Schwarz
+ - Jesse Roberts
